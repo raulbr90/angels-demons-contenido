@@ -66,5 +66,73 @@
         "texto": "No lo quites raspando ni mordiendo: te llevas capas de la uña y la dejas fina y blanda. En el salón lo retiramos con producto, cuidando la uña natural."
       }
     ]
+  },
+  {
+    "slug": "unas-para-boda",
+    "titulo": "Uñas para una boda: cuándo hacértelas y qué elegir",
+    "resumen": "Seas la novia o una invitada: con cuánta antelación reservar, qué técnica aguanta mejor el día y qué estilos quedan bien en las fotos.",
+    "pagina": "semipermanente",
+    "secciones": [
+      {
+        "titulo": "Cuándo hacértelas",
+        "texto": "Lo ideal es hacerlas uno o dos días antes: estarán recién hechas y sin crecimiento en las fotos.\n\nSi quieres acrílicas y nunca las has llevado, ponlas una o dos semanas antes para acostumbrarte al largo, y haz un relleno o un retoque los días previos a la boda."
+      },
+      {
+        "titulo": "Qué técnica elegir",
+        "texto": "- Semipermanente o manicura rusa: brillo perfecto que aguanta el día, la fiesta y el viaje de después.\n- Base rubber: si tus uñas son finas o se doblan y no quieres arriesgarte a que se rompa una.\n- Acrílicas: si quieres más largo o una forma concreta."
+      },
+      {
+        "titulo": "Estilos que quedan bien en las fotos",
+        "texto": "Los tonos nude, rosados y lechosos, la francesa y los detalles sutiles (un brillo, una línea fina) combinan con casi cualquier vestido y ramo. Si vas de invitada, puedes jugar con el color del vestido o los complementos.\n\nSi quieres un diseño más elaborado, tráenos fotos de referencia y lo vemos juntas."
+      },
+      {
+        "titulo": "Reserva con tiempo",
+        "texto": "Si vais varias (novia, madrinas, amigas), reservad con antelación para poder elegir hora. En Booksy puedes ver la disponibilidad y elegir profesional."
+      }
+    ]
+  },
+  {
+    "slug": "unas-cortas",
+    "titulo": "Uñas cortas: técnicas y estilos que mejor quedan",
+    "resumen": "No hace falta llevarlas largas para que queden bonitas. Qué técnica elegir, qué colores favorecen y cómo cuidarlas mientras crecen.",
+    "pagina": "semipermanente",
+    "secciones": [
+      {
+        "titulo": "La técnica",
+        "texto": "- Semipermanente: color y brillo que aguantan semanas sin añadir largo.\n- Manicura rusa: con la cutícula bien trabajada, la uña parece más larga y el acabado queda más limpio.\n- Base rubber: refuerza las uñas finas o blandas mientras crecen."
+      },
+      {
+        "titulo": "Colores y formas que favorecen",
+        "texto": "Los tonos nude parecidos a tu piel alargan visualmente los dedos. Los colores oscuros o intensos en uñas cortas quedan elegantes y muy actuales.\n\nLas formas ovalada o cuadrada con esquinas suaves son las que mejor funcionan en uñas cortas."
+      },
+      {
+        "titulo": "Diseños sencillos",
+        "texto": "Puntos, líneas finas, una francesa muy fina o un detalle en una sola uña: en uñas cortas, menos es más."
+      },
+      {
+        "titulo": "Si te muerdes las uñas",
+        "texto": "Llevarlas hechas ayuda a muchas personas a dejar de mordérselas: la base rubber o el acrílico protegen la uña mientras crece. Cuéntanoslo al llegar y te aconsejamos."
+      }
+    ]
+  },
+  {
+    "slug": "pedicura-cada-cuanto",
+    "titulo": "Pedicura: cada cuánto hacerla y qué opción elegir",
+    "resumen": "Diferencias entre la pedicura completa y la express, cuánto suele durar el esmalte en los pies y cómo cuidarlos entre cita y cita.",
+    "pagina": "pedicura",
+    "secciones": [
+      {
+        "titulo": "Completa o express",
+        "texto": "- Pedicura completa spa: cuidado de pies y uñas, con esmalte semipermanente, tradicional o sin esmaltar.\n- Pedicura express: limar y esmaltar, para cuando solo quieres renovar el color.\n\nEn la carta tienes el precio y el tiempo de cada opción."
+      },
+      {
+        "titulo": "¿Cada cuánto?",
+        "texto": "El semipermanente en los pies suele durar bastante más que en las manos, porque la uña del pie crece más despacio. Lo habitual es renovarlo cada mes o mes y medio; en verano, con sandalias, a menudo algo antes."
+      },
+      {
+        "titulo": "Cuidados entre citas",
+        "texto": "- Hidrata los pies a diario, sobre todo los talones.\n- Corta las uñas rectas, sin redondear las esquinas, para evitar que se encarnen.\n- Si llevas semipermanente, no lo arranques: pide cita para retirarlo."
+      }
+    ]
   }
 ]

@@ -206,6 +206,13 @@ content:
         list: true
         options: { maxlength: 60 }
       - { name: comoLlegar, label: "Cómo llegar", type: text, options: { maxlength: 300 }, description: "Transporte y referencias para llegar (sale en Visítanos). Vacío = no se muestra." }
+      - name: google
+        label: "Ficha de Google Maps"
+        type: object
+        fields:
+          - { name: placeId, label: "Place ID de Google", type: string, pattern: { regex: "^ChIJ[\\w-]{10,80}$", message: "Empieza por ChIJ" }, description: "Identifica la ficha: se usa para «Cómo llegar» y «Déjanos tu reseña en Google». No lo cambies si no sabes qué es." }
+          - { name: lat, label: "Latitud", type: number }
+          - { name: lng, label: "Longitud", type: number }
       - name: legal
         label: "Datos legales (opcionales)"
         type: object
