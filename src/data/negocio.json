@@ -1,0 +1,42 @@
+{
+  "nombre": "Angels & Demons Nails",
+  "razonSocial": "ANGELS&DEMONS NAILS SL",
+  "direccion": {
+    "calle": "Rambla de Anselm Clavé, 42",
+    "cp": "08940",
+    "ciudad": "Cornellà de Llobregat",
+    "provincia": "Barcelona",
+    "pais": "ES"
+  },
+  "telefono": "+34672782329",
+  "telefonoTexto": "672 782 329",
+  "horario": [
+    {
+      "dias": "Lunes a sábado",
+      "abre": "09:30",
+      "cierra": "21:00"
+    },
+    {
+      "dias": "Domingo",
+      "cerrado": true
+    }
+  ],
+  "booksy": {
+    "url": "https://booksy.com/es-es/69466_angels-demons-nails_salon-de-unas_48776_cornella-de-llobregat"
+  },
+  "instagram": "angel_and_demons_nails",
+  "valoracion": {
+    "media": 4.9,
+    "total": 597,
+    "fecha": "2026-09-25"
+  },
+  "comodidades": [
+    "Se aceptan tarjetas",
+    "Accesible para movilidad reducida",
+    "Adaptado para niños",
+    "Se permiten mascotas",
+    "Wi-Fi",
+    "Programa de fidelidad"
+  ],
+  "legal": {}
+}

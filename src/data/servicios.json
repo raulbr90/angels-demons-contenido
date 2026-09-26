@@ -1,0 +1,66 @@
+{
+  "categorias": [
+    {
+      "id": "manicura",
+      "nombre": "Manicura",
+      "lado": "angel",
+      "servicios": [
+        { "nombre": "Manicura rusa con esmalte semipermanente", "precio": 25.0, "min": 60, "pagina": "manicura-rusa" },
+        { "nombre": "Manicura semipermanente + base rubber", "precio": 25.0, "min": 50, "pagina": "semipermanente", "popular": true },
+        { "nombre": "Manicura semipermanente + retirada", "precio": 18.9, "min": 40, "pagina": "semipermanente", "popular": true, "nota": "Si traes esmalte anterior para retirar." },
+        { "nombre": "Manicura esmaltado semipermanente sin retirada", "precio": 16.9, "min": 30, "pagina": "semipermanente", "nota": "Si no traes esmalte anterior." },
+        { "nombre": "Limar y esmaltar semipermanente + retirada", "precio": 15.9, "min": 40, "pagina": "semipermanente" },
+        { "nombre": "Limar y esmaltar semipermanente sin retirada", "precio": 13.9, "min": 30, "pagina": "semipermanente", "nota": "Sin limpieza de pieles; si no traes esmalte anterior." },
+        { "nombre": "Manicura con esmalte tradicional", "precio": 15.0, "min": 30 },
+        { "nombre": "Limar y esmaltar con esmalte tradicional", "precio": 12.0, "min": 30 },
+        { "nombre": "Manicura completa para chicos", "precio": 15.0, "min": 30 }
+      ]
+    },
+    {
+      "id": "acrilicas",
+      "nombre": "Acrílicas",
+      "lado": "demon",
+      "servicios": [
+        { "nombre": "Uñas acrílicas nuevas", "precio": 29.9, "min": 70, "pagina": "acrilicas" },
+        { "nombre": "Relleno de uñas acrílicas", "precio": 25.9, "min": 60, "pagina": "acrilicas" },
+        { "nombre": "Retirada de acrílico + uñas acrílicas nuevas", "precio": 39.9, "min": 100, "pagina": "acrilicas", "nota": "Cambio de acrílico." },
+        { "nombre": "Cambio de color uñas acrílicas", "precio": 18.0, "min": 30, "pagina": "acrilicas" },
+        { "nombre": "Extra de uñas acrílicas XXL", "precio": 10.0, "min": 30, "pagina": "acrilicas", "nota": "Extensión en largo XXL (a partir de la 3.ª medición de molde)." },
+        { "nombre": "Reparación de 1 uña", "precio": 3.0, "min": 10 }
+      ]
+    },
+    {
+      "id": "pedicura",
+      "nombre": "Pedicura",
+      "lado": "angel",
+      "servicios": [
+        { "nombre": "Pedicura completa spa con esmalte semipermanente", "precio": 30.0, "min": 60, "pagina": "pedicura" },
+        { "nombre": "Pedicura completa spa con esmalte tradicional", "precio": 30.0, "min": 60, "pagina": "pedicura" },
+        { "nombre": "Pedicura completa spa sin esmaltar", "precio": 25.0, "min": 50, "pagina": "pedicura" },
+        { "nombre": "Pedicura express: limar y esmaltar semipermanente", "precio": 18.0, "min": 30, "pagina": "pedicura" },
+        { "nombre": "Pedicura express: limar y esmaltar tradicional", "precio": 15.0, "min": 30, "pagina": "pedicura" },
+        { "nombre": "Uña del primer dedo del pie", "precio": 5.0, "min": 15 }
+      ]
+    },
+    {
+      "id": "retiradas",
+      "nombre": "Retiradas",
+      "servicios": [
+        { "nombre": "Retirada de semipermanente (si no se esmalta)", "precio": 10.0, "min": 30 },
+        { "nombre": "Retirada base rubber", "precio": 15.0, "min": 30 },
+        { "nombre": "Retirada de acrílico", "precio": 15.0, "min": 40 },
+        { "nombre": "Retirada acrílico + base rubber", "precio": 35.0, "min": 80 },
+        { "nombre": "Retirada semipermanente pies (si no se esmalta)", "precio": 10.0, "min": 20 },
+        { "nombre": "Retirada semipermanente pies + cortar uñas", "precio": 13.0, "min": 30 }
+      ]
+    },
+    {
+      "id": "diseno",
+      "nombre": "Diseño",
+      "lado": "demon",
+      "servicios": [
+        { "nombre": "Diseños y decoraciones", "precio": 2.0, "min": 15, "pagina": "diseno", "popular": true, "nota": "Decoraciones simples: 1 €/uña. Complejidad media: 2 €/uña. A partir de 6 uñas decoradas, el resto gratis." }
+      ]
+    }
+  ]
+}

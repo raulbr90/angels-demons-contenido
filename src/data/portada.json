@@ -1,0 +1,22 @@
+{
+  "eyebrow": "Nail salon · Cornellà de Llobregat",
+  "titular": {
+    "linea1": "Para tu lado",
+    "clave1": "angel.",
+    "linea2": "Y para",
+    "clave2": "el otro."
+  },
+  "entradilla": "Manicura rusa, semipermanente, acrílicas y nail art. Del nude más limpio al diseño que no pasa desapercibido.",
+  "hero": {
+    "angel": {
+      "foto": "src/assets/fotos/IMG_8372.jpg",
+      "alt": "Uñas stiletto en rosa cromado con dibujo blanco",
+      "pie": "Angel · rosa cromado"
+    },
+    "demon": {
+      "foto": "src/assets/fotos/IMG_3880.jpg",
+      "alt": "French negra con dibujo cruzado",
+      "pie": "Demon · french negra"
+    }
+  }
+}
