@@ -45,8 +45,9 @@ content:
             type: object
             list: { min: 1, collapsible: { summary: "{fields.nombre} — {fields.precio} €" } }
             fields:
-              - { name: nombre, label: Nombre del servicio, type: string, required: true, options: { maxlength: 120 } }
-              - { name: precio, label: "Precio (€)", type: number, required: true, options: { min: 0, max: 1000 }, description: "Usa como mucho 2 decimales, p. ej. 18.90." }
+              - { name: nombre, label: Nombre del servicio, type: string, required: true, options: { maxlength: 120 }, description: "Si un servicio se borra de Booksy, desaparece solo de la web. Los servicios nuevos de Booksy salen en «Otros servicios» hasta que los añadas aquí." }
+              - { name: booksy, label: "Nombre en Booksy (solo si es distinto)", type: string, options: { maxlength: 120 }, description: "Rellénalo solo si en Booksy el servicio se llama distinto (p. ej. con una errata), para que la web sepa que es el mismo." }
+              - { name: precio, label: "Precio (€)", type: number, required: true, options: { min: 0, max: 1000 }, description: "El precio se actualiza solo desde Booksy. Este valor solo se usa si Booksy no responde. Como mucho 2 decimales, p. ej. 18.90." }
               - { name: min, label: "Duración (minutos)", type: number, required: true, options: { min: 1, max: 600 } }
               - { name: pagina, label: "Página de servicio asociada", type: select, options: { values: [manicura-rusa, semipermanente, acrilicas, pedicura, diseno] } }
               - { name: popular, label: "Destacar en portada", type: boolean }
@@ -86,7 +87,7 @@ content:
     format: json
     list: true
     fields:
-      - { name: nombre, label: Nombre, type: string, required: true, options: { maxlength: 40 } }
+      - { name: nombre, label: Nombre, type: string, required: true, options: { maxlength: 40 }, description: "Quién sale en la web lo decide Booksy: si alguien entra o sale del equipo en Booksy, la web cambia sola. Aquí solo se añaden foto y especialidad." }
       - { name: permisoFoto, label: "Permiso para publicar su foto", type: boolean, description: "Solo si la profesional ha dado permiso por escrito" }
       - { name: foto, label: Foto, type: image, options: { media: fotos } }
       - { name: especialidad, label: Especialidad, type: text, options: { maxlength: 120 } }
@@ -170,7 +171,7 @@ content:
       - { name: telefono, label: "Teléfono (formato internacional)", type: string, required: true, pattern: { regex: "^\\+34\\d{9}$", message: "Formato: +34 seguido de 9 dígitos, sin espacios" }, description: "Se usa para el enlace de llamada y el JSON-LD." }
       - { name: telefonoTexto, label: "Teléfono (texto para mostrar)", type: string, required: true, pattern: { regex: "^\\d{3} \\d{3} \\d{3}$", message: "Formato: 672 782 329" } }
       - name: horario
-        label: Horario
+        label: "Horario (solo si Booksy no responde: el horario se lee de Booksy)"
         type: object
         list: { min: 1, collapsible: { summary: "{fields.dias}" } }
         fields:

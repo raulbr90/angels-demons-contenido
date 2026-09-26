@@ -51,7 +51,7 @@
         { "nombre": "Retirada de acrílico", "precio": 15.0, "min": 40 },
         { "nombre": "Retirada acrílico + base rubber", "precio": 35.0, "min": 80 },
         { "nombre": "Retirada semipermanente pies (si no se esmalta)", "precio": 10.0, "min": 20 },
-        { "nombre": "Retirada semipermanente pies + cortar uñas", "precio": 13.0, "min": 30 }
+        { "nombre": "Retirada semipermanente pies + cortar uñas", "booksy": "Retirada semipermante pies + cortar uñas", "precio": 13.0, "min": 30 }
       ]
     },
     {
@@ -59,7 +59,7 @@
       "nombre": "Diseño",
       "lado": "demon",
       "servicios": [
-        { "nombre": "Diseños y decoraciones", "precio": 2.0, "min": 15, "pagina": "diseno", "popular": true, "nota": "Decoraciones simples: 1 €/uña. Complejidad media: 2 €/uña. A partir de 6 uñas decoradas, el resto gratis." }
+        { "nombre": "Diseños y decoraciones", "booksy": "Diseños decoraciones", "precio": 2.0, "min": 15, "pagina": "diseno", "popular": true, "nota": "Decoraciones simples: 1 €/uña. Complejidad media: 2 €/uña. A partir de 6 uñas decoradas, el resto gratis." }
       ]
     }
   ]
