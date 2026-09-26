@@ -7,6 +7,10 @@
     "clave2": "el otro."
   },
   "entradilla": "Manicura rusa, semipermanente, acrílicas y nail art. Del nude más limpio al diseño que no pasa desapercibido.",
+  "aviso": {
+    "texto": "",
+    "hasta": ""
+  },
   "hero": {
     "angel": {
       "foto": "src/assets/fotos/IMG_8372.jpg",

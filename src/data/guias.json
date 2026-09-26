@@ -1,0 +1,70 @@
+[
+  {
+    "slug": "manicura-rusa-o-semipermanente",
+    "titulo": "Manicura rusa o semipermanente: ¿cuál elegir?",
+    "resumen": "Las dos llevan esmalte semipermanente. La diferencia está en cómo se trabajan las cutículas y en el acabado. Te lo contamos para que reserves la que encaja contigo.",
+    "pagina": "manicura-rusa",
+    "secciones": [
+      {
+        "titulo": "Lo que tienen en común",
+        "texto": "En las dos se aplica esmalte semipermanente, que se seca con lámpara y aguanta mucho más que un esmalte tradicional sin perder el brillo. La diferencia no está en el esmalte, sino en cómo se prepara la uña."
+      },
+      {
+        "titulo": "Qué cambia en la manicura rusa",
+        "texto": "Es una técnica en seco: las cutículas y las pieles se trabajan con torno y fresas finas, sin remojar las manos. Así el esmalte puede llegar hasta la base de la uña, el acabado queda más limpio y el crecimiento se nota menos con los días.\n\nPor eso lleva algo más de tiempo que una manicura semipermanente básica."
+      },
+      {
+        "titulo": "Cuándo elegir cada una",
+        "texto": "- Manicura rusa: si buscas un acabado muy pulido, hace tiempo que no te cuidas las cutículas o quieres que se note menos el paso de los días.\n- Semipermanente: si quieres color y brillo en menos tiempo o vienes a mantener una manicura reciente.\n\nSi tienes dudas, cuéntanoslo al llegar y lo valoramos contigo."
+      },
+      {
+        "titulo": "Precio y tiempo",
+        "texto": "El precio y el tiempo aproximado de cada opción están siempre al día en la carta. Al reservar en Booksy ves la disponibilidad y el precio final."
+      }
+    ]
+  },
+  {
+    "slug": "unas-acrilicas-cuanto-duran",
+    "titulo": "Uñas acrílicas: cuánto duran y cómo cuidarlas",
+    "resumen": "Cada cuánto conviene hacer el relleno, qué hacer si se rompe una uña y por qué nunca hay que arrancarlas.",
+    "pagina": "acrilicas",
+    "secciones": [
+      {
+        "titulo": "¿Cuánto duran?",
+        "texto": "El acrílico no se cae solo: lo que pasa es que la uña natural crece y deja un hueco en la base. Lo habitual es hacer un relleno cada tres o cuatro semanas, según lo rápido que te crezcan las uñas y el uso que les des.\n\nEn el relleno se lima el acrílico, se cubre la parte que ha crecido y, si quieres, se cambia el color."
+      },
+      {
+        "titulo": "Cuidados en casa",
+        "texto": "- Usa guantes para fregar y para los productos de limpieza fuertes.\n- No uses las uñas como herramienta para abrir latas o despegar etiquetas.\n- Hidrata las cutículas cada día con aceite o crema.\n- Sécalas bien después de la ducha o de la piscina."
+      },
+      {
+        "titulo": "Si se rompe o se levanta una",
+        "texto": "No la arranques ni la despegues tú: al tirar te llevas capas de la uña natural y la debilitas. Si una uña se levanta o se rompe, pide cita para repararla; es rápido y evita que entre humedad por debajo."
+      },
+      {
+        "titulo": "Cuando quieras quitarlas",
+        "texto": "Hazlo en el salón. Retirarlas con producto y lima, sin tirones, protege tu uña natural mucho más que quitarlas en casa."
+      }
+    ]
+  },
+  {
+    "slug": "como-hacer-que-dure-el-semipermanente",
+    "titulo": "Cómo hacer que tu semipermanente dure más",
+    "resumen": "Pequeños gestos del día a día que alargan el brillo y evitan que el esmalte se levante antes de tiempo.",
+    "pagina": "semipermanente",
+    "secciones": [
+      {
+        "titulo": "En el día a día",
+        "texto": "- Usa guantes para fregar y limpiar.\n- Pon aceite de cutículas cada día: la piel hidratada ayuda a que el esmalte no se levante por los bordes.\n- No uses las uñas como herramienta.\n- Si se levanta un borde, no tires de él: pide cita para retocarlo."
+      },
+      {
+        "titulo": "¿Cada cuánto renovarlo?",
+        "texto": "Lo normal es renovarlo cada dos o tres semanas, cuando empieza a notarse el crecimiento. Si quieres alargar más entre citas, pregunta por la manicura rusa, o por la base rubber si tus uñas son finas o se doblan: les da más resistencia."
+      },
+      {
+        "titulo": "Quítalo bien",
+        "texto": "No lo quites raspando ni mordiendo: te llevas capas de la uña y la dejas fina y blanda. En el salón lo retiramos con producto, cuidando la uña natural."
+      }
+    ]
+  }
+]
