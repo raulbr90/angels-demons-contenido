@@ -1,241 +1,340 @@
 #
 # Configuración de Pages CMS (https://pagescms.org) para Angels & Demons Nails.
+# Es el panel de la dueña: todo en lenguaje llano, lo más usado arriba y lo
+# técnico oculto (27/09/2026).
 #
 # IMPORTANTE: cada clave declarada aquí debe existir en los esquemas Zod de
 # src/lib/esquemas.ts, y viceversa — lo comprueba tests/pages-cms.test.ts.
 # Pages CMS borra al guardar cualquier clave del JSON que no esté declarada
 # en `fields`, así que un desajuste aquí provoca pérdida silenciosa de datos.
+# Los campos con `hidden: true` sí se conservan al guardar (se cargan en el
+# formulario y se guardan tal cual, solo no se muestran: verificado en el
+# código de Pages CMS, components/entry/entry-form.tsx y lib/schema.ts).
+#
+# Este archivo está copiado igual en el repositorio de contenido
+# (raulbr90/angels-demons-contenido), que es el que usa el panel: si cambia,
+# se actualizan los dos.
+#
+# Las opciones que se repiten (páginas de servicio) se definen una vez con
+# un ancla YAML (&paginas) y se reutilizan (*paginas).
+#
+# Listas: los archivos que son una lista la guardan dentro de un objeto
+# (`{ "looks": [...] }`, ver CLAVE_LISTA en src/lib/esquemas.ts) porque Pages
+# CMS solo titula cada elemento («Rosa cromado · Cromado») cuando la lista es
+# un campo; en la raíz del archivo los llama «Item #1», «Item #2»…
 #
 # Nota sobre fotos: el campo `image` de Pages CMS solo admite UNA fuente de
-# medios por campo (options.media es un string, no una lista — verificado en
-# https://pagescms.org/docs/configuration/fields/image/). Por eso se usa una
-# única fuente "fotos" que sirve a la vez para las fotos ya curadas del
-# repositorio (src/assets/fotos) y para las fotos nuevas que suba la dueña:
-# así cualquier campo de imagen puede tanto elegir una foto existente como
-# subir una nueva desde el mismo selector, sin el riesgo (no documentado)
-# de que Pages CMS trate de forma rara una ruta que apunta fuera de la
-# fuente de medios configurada.
+# medios por campo, así que hay una única fuente "fotos" para todas.
 #
 
 media:
   - name: fotos
-    label: Fotos del salón
+    label: 📷 Fotos del salón
     input: src/assets/fotos
     output: src/assets/fotos
     rename: safe
     extensions: [jpg, jpeg, png, webp]
 
 content:
-  - name: servicios
-    label: Servicios y precios
-    type: file
-    path: src/data/servicios.json
-    format: json
-    fields:
-      - name: categorias
-        label: Categorías
-        type: object
-        list: { min: 1 }
-        fields:
-          - { name: id, label: Identificador, type: string, required: true, pattern: { regex: "^[a-z0-9-]+$", message: "Solo minúsculas, números y guiones (p. ej. unas-gel)" }, description: "Identificador interno de la categoría (se usa en enlaces internos). Al crear una categoría nueva, escribe uno en minúsculas sin espacios." }
-          - { name: nombre, label: Nombre, type: string, required: true, options: { maxlength: 60 } }
-          - { name: lado, label: "Lado (Angel/Demon)", type: select, options: { values: [angel, demon] }, description: "(no se muestra todavía en la web)" }
-          - name: servicios
-            label: Servicios de la categoría
-            type: object
-            list: { min: 1, collapsible: { summary: "{fields.nombre} — {fields.precio} €" } }
-            fields:
-              - { name: nombre, label: Nombre del servicio, type: string, required: true, options: { maxlength: 120 }, description: "Si un servicio se borra de Booksy, desaparece solo de la web. Los servicios nuevos de Booksy salen en «Otros servicios» hasta que los añadas aquí." }
-              - { name: booksy, label: "Nombre en Booksy (solo si es distinto)", type: string, options: { maxlength: 120 }, description: "Rellénalo solo si en Booksy el servicio se llama distinto (p. ej. con una errata), para que la web sepa que es el mismo." }
-              - { name: precio, label: "Precio (€)", type: number, required: true, options: { min: 0, max: 1000 }, description: "El precio se actualiza solo desde Booksy. Este valor solo se usa si Booksy no responde. Como mucho 2 decimales, p. ej. 18.90." }
-              - { name: min, label: "Duración (minutos)", type: number, required: true, options: { min: 1, max: 600 } }
-              - { name: pagina, label: "Página de servicio asociada", type: select, options: { values: [manicura-rusa, semipermanente, acrilicas, pedicura, diseno] } }
-              - { name: popular, label: "Destacar en portada", type: boolean }
-              - { name: desde, label: "Mostrar como 'desde'", type: boolean }
-              - { name: nota, label: Nota, type: text, options: { maxlength: 300 } }
-
-  - name: paginas-servicio
-    label: Páginas de servicio
-    type: file
-    path: src/data/paginas-servicio.json
-    format: json
-    list: true
-    fields:
-      - { name: slug, label: Identificador de la página, type: select, required: true, readonly: true, options: { values: [manicura-rusa, semipermanente, acrilicas, pedicura, diseno] } }
-      - { name: nombre, label: Título, type: string, required: true, options: { maxlength: 60 } }
-      - { name: descripcion, label: Descripción, type: text, options: { maxlength: 2000 } }
-      - { name: foto, label: Foto de portada de la página, type: image, options: { media: fotos } }
-
-  - name: looks
-    label: Galería de looks
-    type: file
-    path: src/data/looks.json
-    format: json
-    list: true
-    fields:
-      - { name: titulo, label: Título del look, type: string, required: true, options: { maxlength: 40 } }
-      - { name: tecnica, label: Técnica, type: string, required: true, options: { maxlength: 30 } }
-      - { name: lado, label: "Lado (Angel/Demon)", type: select, required: true, options: { values: [angel, demon] } }
-      - { name: foto, label: Foto, type: image, required: true, options: { media: fotos } }
-      - { name: alt, label: "Texto alternativo (accesibilidad)", type: string, required: true, options: { maxlength: 160 }, description: "Describe la imagen para personas que usan lector de pantalla." }
-      - { name: pagina, label: "Página de servicio asociada", type: select, options: { values: [manicura-rusa, semipermanente, acrilicas, pedicura, diseno] } }
-
-  - name: equipo
-    label: Equipo
-    type: file
-    path: src/data/equipo.json
-    format: json
-    list: true
-    fields:
-      - { name: nombre, label: Nombre, type: string, required: true, options: { maxlength: 40 }, description: "Quién sale en la web lo decide Booksy: si alguien entra o sale del equipo en Booksy, la web cambia sola. Aquí solo se añaden foto y especialidad." }
-      - { name: permisoFoto, label: "Permiso para publicar su foto", type: boolean, description: "Solo si la profesional ha dado permiso por escrito" }
-      - { name: foto, label: Foto, type: image, options: { media: fotos } }
-      - { name: especialidad, label: Especialidad, type: text, options: { maxlength: 120 } }
-
-  - name: resenas
-    label: Reseñas
-    type: file
-    path: src/data/resenas.json
-    format: json
-    list: true
-    fields:
-      - { name: texto, label: "Texto de la reseña", type: text, required: true, options: { maxlength: 600 }, description: "Pega el texto literal de Booksy, sin retocar." }
-      - { name: autora, label: Nombre de la clienta, type: string, required: true, options: { maxlength: 40 } }
-      - { name: profesional, label: Profesional mencionada, type: string, options: { maxlength: 40 } }
-      - { name: servicio, label: Servicio realizado, type: string, options: { maxlength: 120 } }
-      - { name: fecha, label: Fecha de la reseña, type: date }
-
-  - name: faq
-    label: Preguntas frecuentes
-    type: file
-    path: src/data/faq.json
-    format: json
-    list: true
-    fields:
-      - { name: pregunta, label: Pregunta, type: string, required: true, options: { maxlength: 160 } }
-      - { name: respuesta, label: Respuesta, type: text, required: true, options: { maxlength: 1200 } }
-      - { name: pagina, label: "Página de servicio asociada", type: select, options: { values: [manicura-rusa, semipermanente, acrilicas, pedicura, diseno] } }
-
-  - name: portada
-    label: Portada
-    type: file
-    path: src/data/portada.json
-    format: json
-    fields:
-      - { name: eyebrow, label: "Texto pequeño encima del titular", type: string, required: true, options: { maxlength: 80 } }
-      - name: titular
-        label: Titular
-        type: object
-        fields:
-          - { name: linea1, label: "Línea 1", type: string, required: true, options: { maxlength: 40 } }
-          - { name: clave1, label: "Palabra clave 1 (destacada)", type: string, required: true, options: { maxlength: 20 } }
-          - { name: linea2, label: "Línea 2", type: string, required: true, options: { maxlength: 40 } }
-          - { name: clave2, label: "Palabra clave 2 (destacada)", type: string, required: true, options: { maxlength: 20 } }
-      - { name: entradilla, label: Entradilla, type: text, required: true, options: { maxlength: 300 } }
+  # ────────────────────────────────────────────────────────────────────
+  - name: dia-a-dia
+    label: Lo más habitual
+    type: group
+    items:
       - name: aviso
-        label: "Aviso temporal (franja en lo alto de todas las páginas)"
-        type: object
+        label: 📣 Aviso en la web (cierres, festivos…)
+        type: file
+        path: src/data/portada.json
+        format: json
+        # Mismo archivo que «Portada»: aquí solo se ve el aviso; el resto de
+        # campos va oculto (y se conserva al guardar).
         fields:
-          - { name: texto, label: "Texto del aviso", type: string, options: { maxlength: 160 }, description: "P. ej. «Cerrado el 12 de octubre por festivo». Vacío = no hay aviso." }
-          - { name: hasta, label: "Mostrar hasta (incluido)", type: date, description: "El aviso desaparece solo al día siguiente. Vacío = hasta que lo borres." }
-      - name: hero
-        label: "Fotos principales (Angel / Demon)"
-        type: object
-        fields:
-          - name: angel
-            label: Foto del lado Angel
+          - name: aviso
+            label: Aviso
             type: object
             fields:
-              - { name: foto, label: Foto, type: image, required: true, options: { media: fotos } }
-              - { name: alt, label: "Texto alternativo (accesibilidad)", type: string, required: true, options: { maxlength: 160 } }
-              - { name: pie, label: "Pie de foto", type: string, required: true, options: { maxlength: 60 } }
-          - name: demon
-            label: Foto del lado Demon
+              - { name: texto, label: "Texto del aviso", type: string, options: { maxlength: 160 }, description: "Sale en una franja en lo alto de todas las páginas. Por ejemplo: «Cerrado el 12 de octubre por festivo». Para quitarlo, borra el texto." }
+              - { name: hasta, label: "Mostrar hasta el día (incluido)", type: date, description: "Al día siguiente desaparece solo. Si lo dejas vacío, se queda hasta que borres el texto." }
+          - { name: eyebrow, type: string, hidden: true }
+          - name: titular
             type: object
+            hidden: true
+            fields:
+              - { name: linea1, type: string }
+              - { name: clave1, type: string }
+              - { name: linea2, type: string }
+              - { name: clave2, type: string }
+          - { name: entradilla, type: text, hidden: true }
+          - name: hero
+            type: object
+            hidden: true
+            fields:
+              - name: angel
+                type: object
+                fields:
+                  - { name: foto, type: image, options: { media: fotos } }
+                  - { name: alt, type: string }
+                  - { name: pie, type: string }
+              - name: demon
+                type: object
+                fields:
+                  - { name: foto, type: image, options: { media: fotos } }
+                  - { name: alt, type: string }
+                  - { name: pie, type: string }
+
+      - name: looks
+        label: 📸 Fotos de trabajos (galería)
+        type: file
+        path: src/data/looks.json
+        format: json
+        fields:
+          - name: looks
+            label: Fotos de la galería
+            description: "Salen en la portada en este orden (arrastra para cambiarlo). Mejor fotos verticales, bien iluminadas."
+            type: object
+            list: { min: 1, collapsible: { summary: "{fields.titulo} · {fields.tecnica}" } }
             fields:
               - { name: foto, label: Foto, type: image, required: true, options: { media: fotos } }
-              - { name: alt, label: "Texto alternativo (accesibilidad)", type: string, required: true, options: { maxlength: 160 } }
-              - { name: pie, label: "Pie de foto", type: string, required: true, options: { maxlength: 60 } }
+              - { name: titulo, label: "Nombre del diseño", type: string, required: true, options: { maxlength: 40 }, description: "Corto, p. ej. «Rosa cromado»." }
+              - { name: tecnica, label: Técnica, type: string, required: true, options: { maxlength: 30 }, description: "P. ej. «Nail art», «French», «Cromado»." }
+              - { name: lado, label: "¿Angel o Demon?", type: select, required: true, options: { values: &lados [{ name: angel, label: "😇 Angel (claro, delicado)" }, { name: demon, label: "😈 Demon (oscuro, atrevido)" }] } }
+              - { name: alt, label: "Describe la foto en una frase", type: string, required: true, options: { maxlength: 160 }, description: "Lo leen las personas ciegas y Google. P. ej. «Uñas nude con flores blancas y hojas negras»." }
+              - { name: pagina, label: "¿De qué servicio es?", type: select, options: { values: &paginas [{ name: manicura-rusa, label: Manicura rusa }, { name: semipermanente, label: Manicura semipermanente }, { name: acrilicas, label: Uñas acrílicas }, { name: pedicura, label: Pedicura }, { name: diseno, label: Diseño de uñas }] }, description: "Opcional: la foto sale también en la página de ese servicio." }
 
-  - name: negocio
-    label: Datos del negocio
-    type: file
-    path: src/data/negocio.json
-    format: json
-    fields:
-      - { name: nombre, label: Nombre comercial, type: string, required: true, options: { maxlength: 80 } }
-      - { name: razonSocial, label: Razón social, type: string, required: true, options: { maxlength: 120 } }
-      - name: direccion
-        label: Dirección
-        type: object
+      - name: resenas
+        label: ⭐ Reseñas destacadas
+        type: file
+        path: src/data/resenas.json
+        format: json
         fields:
-          - { name: calle, label: Calle y número, type: string, required: true, options: { maxlength: 120 } }
-          - { name: cp, label: Código postal, type: string, required: true, pattern: { regex: "^\\d{5}$", message: "Debe tener 5 dígitos" } }
-          - { name: ciudad, label: Ciudad, type: string, required: true, options: { maxlength: 80 } }
-          - { name: provincia, label: Provincia, type: string, required: true, options: { maxlength: 80 } }
-          - { name: pais, label: País, type: string, required: true, readonly: true, pattern: { regex: "^ES$", message: "Solo se admite España (ES)" } }
-      - { name: telefono, label: "Teléfono (formato internacional)", type: string, required: true, pattern: { regex: "^\\+34\\d{9}$", message: "Formato: +34 seguido de 9 dígitos, sin espacios" }, description: "Se usa para el enlace de llamada y el JSON-LD." }
-      - { name: telefonoTexto, label: "Teléfono (texto para mostrar)", type: string, required: true, pattern: { regex: "^\\d{3} \\d{3} \\d{3}$", message: "Formato: 672 782 329" } }
-      - { name: whatsapp, label: "WhatsApp (formato internacional)", type: string, pattern: { regex: "^\\+34[67]\\d{8}$", message: "Formato: +34 seguido del móvil, sin espacios (p. ej. +34600000000)" }, description: "Número para el botón «Escríbenos por WhatsApp». Si se deja vacío, el botón no aparece." }
-      - name: horario
-        label: "Horario (solo si Booksy no responde: el horario se lee de Booksy)"
-        type: object
-        list: { min: 1, collapsible: { summary: "{fields.dias}" } }
-        fields:
-          - { name: dias, label: "Días (p. ej. «Lunes a sábado»)", type: string, required: true, options: { maxlength: 40 } }
-          - { name: abre, label: "Hora de apertura (HH:MM)", type: string, pattern: { regex: "^\\d{2}:\\d{2}$", message: "Formato: 09:30" } }
-          - { name: cierra, label: "Hora de cierre (HH:MM)", type: string, pattern: { regex: "^\\d{2}:\\d{2}$", message: "Formato: 21:00" } }
-          - { name: cerrado, label: "Cerrado ese día", type: boolean }
-      - name: booksy
-        label: Booksy
-        type: object
-        fields:
-          - { name: url, label: "Enlace de reserva de Booksy", type: string, required: true, pattern: { regex: "^https://([a-z0-9-]+\\.)?booksy\\.com/", message: "Debe ser un enlace de booksy.com" } }
-      - { name: instagram, label: "Usuario de Instagram (sin @)", type: string, required: true, pattern: { regex: "^[A-Za-z0-9._]{1,30}$", message: "Solo letras, números, puntos y guiones bajos" } }
-      - name: valoracion
-        label: Valoración de Booksy
-        description: "La web la lee sola de Booksy cuatro veces al día. Estos datos solo se usan si Booksy no responde: no hace falta tocarlos."
-        type: object
-        fields:
-          - { name: media, label: "Media (0 a 5)", type: number, required: true, options: { min: 0, max: 5 }, description: "Copia la valoración media que muestra Booksy." }
-          - { name: total, label: "Número total de reseñas", type: number, required: true, options: { min: 0 } }
-          - { name: fecha, label: "Fecha de la última actualización", type: date, required: true }
-      - name: comodidades
-        label: Comodidades del salón
-        type: string
-        list: true
-        options: { maxlength: 60 }
-      - { name: comoLlegar, label: "Cómo llegar", type: text, options: { maxlength: 300 }, description: "Transporte y referencias para llegar (sale en Visítanos). Vacío = no se muestra." }
-      - name: google
-        label: "Ficha de Google Maps"
-        type: object
-        fields:
-          - { name: placeId, label: "Place ID de Google", type: string, pattern: { regex: "^ChIJ[\\w-]{10,80}$", message: "Empieza por ChIJ" }, description: "Identifica la ficha: se usa para «Cómo llegar» y «Déjanos tu reseña en Google». No lo cambies si no sabes qué es." }
-          - { name: lat, label: "Latitud", type: number }
-          - { name: lng, label: "Longitud", type: number }
-      - name: legal
-        label: "Datos legales (opcionales)"
-        type: object
-        fields:
-          - { name: nif, label: NIF/CIF, type: string, options: { maxlength: 20 } }
-          - { name: email, label: "Email de contacto legal", type: string, pattern: { regex: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$", message: "Debe ser un email válido" } }
-          - { name: registro, label: "Datos de registro mercantil", type: text, options: { maxlength: 300 } }
+          - name: resenas
+            label: Reseñas
+            description: "Copia las reseñas de Booksy tal cual, sin retocarlas. La nota media y el número de reseñas se actualizan solos."
+            type: object
+            list: { collapsible: { summary: "{fields.autora}: {fields.texto}" } }
+            fields:
+              - { name: texto, label: "Texto de la reseña", type: text, required: true, options: { maxlength: 600 }, description: "Pégalo tal cual está en Booksy." }
+              - { name: autora, label: "Nombre de la clienta", type: string, required: true, options: { maxlength: 40 } }
+              - { name: profesional, label: "Quién la atendió", type: string, options: { maxlength: 40 } }
+              - { name: servicio, label: "Qué se hizo", type: string, options: { maxlength: 120 } }
+              - { name: fecha, label: "Fecha de la reseña", type: date }
 
-  - name: guias
-    label: Guías
-    type: file
-    path: src/data/guias.json
-    format: json
-    list: true
-    fields:
-      - { name: titulo, label: Título, type: string, required: true, options: { maxlength: 100 } }
-      - { name: slug, label: "Dirección (parte final del enlace)", type: string, required: true, pattern: { regex: "^[a-z0-9]+(-[a-z0-9]+)*$", message: "Solo minúsculas, números y guiones, p. ej. cuidados-semipermanente" }, description: "No la cambies en guías ya publicadas: rompería los enlaces compartidos." }
-      - { name: resumen, label: "Resumen (sale en la lista y en Google)", type: text, required: true, options: { maxlength: 200 } }
-      - { name: pagina, label: "Servicio relacionado", type: select, options: { values: [manicura-rusa, semipermanente, acrilicas, pedicura, diseno] } }
-      - name: secciones
-        label: Secciones
-        type: object
-        list: { min: 1, collapsible: { summary: "{fields.titulo}" } }
+  # ────────────────────────────────────────────────────────────────────
+  - name: textos
+    label: Textos y fotos de la web
+    type: group
+    items:
+      - name: portada
+        label: 🏠 Portada
+        type: file
+        path: src/data/portada.json
+        format: json
         fields:
-          - { name: titulo, label: "Título de la sección", type: string, options: { maxlength: 100 } }
-          - { name: texto, label: Texto, type: text, required: true, options: { maxlength: 3000 }, description: "Deja una línea en blanco entre párrafos. Para una lista, empieza cada línea con «- »." }
+          - { name: eyebrow, label: "Frase pequeña encima del titular", type: string, required: true, options: { maxlength: 80 }, description: "Di qué es y dónde está el salón: es lo que Google entiende como título de la portada. P. ej. «Salón de uñas en Cornellà de Llobregat»." }
+          - name: titular
+            label: Titular grande
+            description: "Se lee seguido: primera parte + palabra destacada, y en otra línea segunda parte + palabra destacada."
+            type: object
+            fields:
+              - { name: linea1, label: "Primera parte", type: string, required: true, options: { maxlength: 40 } }
+              - { name: clave1, label: "Palabra destacada", type: string, required: true, options: { maxlength: 20 } }
+              - { name: linea2, label: "Segunda parte", type: string, required: true, options: { maxlength: 40 } }
+              - { name: clave2, label: "Palabra destacada", type: string, required: true, options: { maxlength: 20 } }
+          - { name: entradilla, label: "Frase de presentación", type: text, required: true, options: { maxlength: 300 }, description: "Una o dos frases bajo el titular." }
+          - name: hero
+            label: Las dos fotos grandes
+            type: object
+            fields:
+              - name: angel
+                label: "😇 Foto Angel (la clara)"
+                type: object
+                fields:
+                  - { name: foto, label: Foto, type: image, required: true, options: { media: fotos } }
+                  - { name: alt, label: "Describe la foto en una frase", type: string, required: true, options: { maxlength: 160 }, description: "Lo leen las personas ciegas y Google." }
+                  - { name: pie, label: "Texto bajo la foto", type: string, required: true, options: { maxlength: 60 }, description: "Con este formato: «Angel · rosa cromado»." }
+              - name: demon
+                label: "😈 Foto Demon (la oscura)"
+                type: object
+                fields:
+                  - { name: foto, label: Foto, type: image, required: true, options: { media: fotos } }
+                  - { name: alt, label: "Describe la foto en una frase", type: string, required: true, options: { maxlength: 160 }, description: "Lo leen las personas ciegas y Google." }
+                  - { name: pie, label: "Texto bajo la foto", type: string, required: true, options: { maxlength: 60 }, description: "Con este formato: «Demon · french negra»." }
+          # El aviso se edita en «Aviso en la web».
+          - name: aviso
+            type: object
+            hidden: true
+            fields:
+              - { name: texto, type: string }
+              - { name: hasta, type: date }
+
+      - name: faq
+        label: ❓ Preguntas frecuentes
+        type: file
+        path: src/data/faq.json
+        format: json
+        fields:
+          - name: preguntas
+            label: Preguntas
+            description: "La pregunta sobre precios se escribe sola con los precios de Booksy: no hace falta añadirla."
+            type: object
+            list: { collapsible: { summary: "{fields.pregunta}" } }
+            fields:
+              - { name: pregunta, label: Pregunta, type: string, required: true, options: { maxlength: 160 } }
+              - { name: respuesta, label: Respuesta, type: text, required: true, options: { maxlength: 1200 } }
+              - { name: pagina, label: "¿Es de un servicio concreto?", type: select, options: { values: *paginas }, description: "Si eliges uno, la pregunta sale en la página de ese servicio en vez de en la portada." }
+
+      - name: guias
+        label: 📖 Guías y consejos
+        type: file
+        path: src/data/guias.json
+        format: json
+        fields:
+          - name: guias
+            label: Guías
+            type: object
+            list: { collapsible: { summary: "{fields.titulo}" } }
+            fields:
+              - { name: titulo, label: Título, type: string, required: true, options: { maxlength: 100 } }
+              - { name: resumen, label: "Resumen corto", type: text, required: true, options: { maxlength: 200 }, description: "Sale en la lista de guías y en Google." }
+              - { name: slug, label: "Dirección web", type: string, required: true, pattern: { regex: "^[a-z0-9]+(-[a-z0-9]+)*$", message: "Solo minúsculas sin acentos, números y guiones, p. ej. unas-de-verano" }, description: "La parte final del enlace: palabras en minúscula, sin acentos, separadas por guiones (p. ej. unas-de-verano). No la cambies en guías ya publicadas." }
+              - { name: pagina, label: "Servicio relacionado", type: select, options: { values: *paginas } }
+              - name: secciones
+                label: Apartados
+                type: object
+                list: { min: 1, collapsible: { summary: "{fields.titulo}" } }
+                fields:
+                  - { name: titulo, label: "Título del apartado", type: string, options: { maxlength: 100 } }
+                  - { name: texto, label: Texto, type: text, required: true, options: { maxlength: 3000 }, description: "Deja una línea en blanco entre párrafos. Para una lista, empieza cada línea con un guion y un espacio: «- »." }
+
+      - name: equipo
+        label: 👩 Equipo
+        type: file
+        path: src/data/equipo.json
+        format: json
+        fields:
+          - name: personas
+            label: Profesionales
+            description: "Quién sale en la web lo decide Booksy: si alguien entra o sale del equipo allí, la web cambia sola. Aquí solo se pone su foto y su especialidad."
+            type: object
+            list: { collapsible: { summary: "{fields.nombre}" } }
+            fields:
+              - { name: nombre, label: Nombre, type: string, required: true, options: { maxlength: 40 }, description: "Igual que en Booksy." }
+              - { name: foto, label: Foto, type: image, options: { media: fotos }, description: "Mejor de frente y con la cara centrada: se recorta en círculo." }
+              - { name: permisoFoto, label: "Ha dado permiso por escrito para publicar su foto", type: boolean, description: "Sin esta casilla marcada, sale solo con su inicial." }
+              - { name: especialidad, label: "Especialidad (opcional)", type: text, options: { maxlength: 120 } }
+
+      - name: paginas-servicio
+        label: 💅 Páginas de cada servicio
+        type: file
+        path: src/data/paginas-servicio.json
+        format: json
+        fields:
+          - name: paginas
+            label: Páginas
+            description: "Una página por técnica. Se pueden cambiar sus textos y su foto, pero no añadir ni borrar páginas."
+            type: object
+            list: { min: 5, max: 5, collapsible: { summary: "{fields.nombre}" } }
+            fields:
+              - { name: slug, label: "Página", type: select, required: true, readonly: true, options: { values: *paginas } }
+              - { name: nombre, label: Título, type: string, required: true, options: { maxlength: 60 } }
+              - { name: descripcion, label: "Texto de presentación", type: text, options: { maxlength: 2000 } }
+              - { name: foto, label: "Foto de la cabecera", type: image, options: { media: fotos }, description: "Una foto vertical de un trabajo de esta técnica." }
+
+  # ────────────────────────────────────────────────────────────────────
+  - name: ajustes
+    label: Ajustes (casi nunca hace falta)
+    type: group
+    items:
+      - name: servicios
+        label: 🧾 Carta (categorías y duraciones)
+        type: file
+        path: src/data/servicios.json
+        format: json
+        fields:
+          - name: categorias
+            label: Categorías de la carta
+            description: "Los precios y los servicios que existen se actualizan solos desde Booksy. Aquí se decide en qué categoría y orden sale cada uno, su duración y su nota. Un servicio nuevo de Booksy sale en «Otros servicios» hasta que lo añadas aquí."
+            type: object
+            list: { min: 1, collapsible: { summary: "{fields.nombre}" } }
+            fields:
+              - { name: nombre, label: "Nombre de la categoría", type: string, required: true, options: { maxlength: 60 } }
+              - { name: id, type: string, hidden: true }
+              - { name: lado, type: select, hidden: true, options: { values: [angel, demon] } }
+              - name: servicios
+                label: Servicios de la categoría
+                type: object
+                list: { min: 1, collapsible: { summary: "{fields.nombre}" } }
+                fields:
+                  - { name: nombre, label: "Nombre del servicio", type: string, required: true, options: { maxlength: 120 } }
+                  - { name: min, label: "Duración (minutos)", type: number, required: true, options: { min: 1, max: 600 } }
+                  - { name: nota, label: "Nota pequeña bajo el servicio", type: text, options: { maxlength: 300 } }
+                  - { name: pagina, label: "¿De qué página de servicio es?", type: select, options: { values: *paginas } }
+                  - { name: popular, label: "Destacarlo en la portada", type: boolean }
+                  - { name: desde, label: "Poner «desde» delante del precio", type: boolean }
+                  - { name: precio, label: "Precio (€) de reserva", type: number, required: true, options: { min: 0, max: 1000 }, description: "Se actualiza solo desde Booksy: este solo se usa si Booksy no responde. Con punto para los céntimos, p. ej. 18.90." }
+                  - { name: booksy, label: "Nombre en Booksy (solo si es distinto)", type: string, options: { maxlength: 120 }, description: "Solo si en Booksy se llama distinto (p. ej. con una errata), para que la web sepa que es el mismo." }
+
+      - name: negocio
+        label: 🏪 Datos del salón
+        type: file
+        path: src/data/negocio.json
+        format: json
+        fields:
+          - { name: nombre, label: "Nombre del salón", type: string, required: true, options: { maxlength: 80 } }
+          - name: direccion
+            label: Dirección
+            type: object
+            fields:
+              - { name: calle, label: "Calle y número", type: string, required: true, options: { maxlength: 120 } }
+              - { name: cp, label: "Código postal", type: string, required: true, pattern: { regex: "^\\d{5}$", message: "Debe tener 5 cifras" } }
+              - { name: ciudad, label: Ciudad, type: string, required: true, options: { maxlength: 80 } }
+              - { name: provincia, label: Provincia, type: string, required: true, options: { maxlength: 80 } }
+              - { name: pais, type: string, hidden: true }
+          - { name: telefonoTexto, label: "Teléfono (como se ve en la web)", type: string, required: true, pattern: { regex: "^\\d{3} \\d{3} \\d{3}$", message: "Así: 672 782 329" } }
+          - { name: telefono, label: "El mismo teléfono con +34 delante y sin espacios", type: string, required: true, pattern: { regex: "^\\+34\\d{9}$", message: "Así: +34672782329" }, description: "Es el que usa el botón de llamar." }
+          - { name: whatsapp, label: "WhatsApp (con +34 delante y sin espacios)", type: string, pattern: { regex: "^\\+34[67]\\d{8}$", message: "Así: +34672782329" }, description: "Si lo dejas vacío, no sale el botón de WhatsApp." }
+          - { name: comoLlegar, label: "Cómo llegar", type: text, options: { maxlength: 300 }, description: "Metro, tren, parking… Sale en «Visítanos». Vacío = no se muestra." }
+          - name: comodidades
+            label: "Comodidades del salón"
+            description: "Una por línea, p. ej. «Wi-Fi» o «Se aceptan tarjetas»."
+            type: string
+            list: true
+            options: { maxlength: 60 }
+          - { name: instagram, label: "Usuario de Instagram (sin @)", type: string, required: true, pattern: { regex: "^[A-Za-z0-9._]{1,30}$", message: "Solo letras, números, puntos y guiones bajos" } }
+          - name: booksy
+            label: Booksy
+            type: object
+            fields:
+              - { name: url, label: "Enlace de tu página de Booksy", type: string, required: true, pattern: { regex: "^https://([a-z0-9-]+\\.)?booksy\\.com/", message: "Debe ser un enlace de booksy.com" }, description: "Es el que abren todos los botones de «Reservar»." }
+          - { name: razonSocial, label: "Razón social (sale en el pie y en el aviso legal)", type: string, required: true, options: { maxlength: 120 } }
+          - name: legal
+            label: "Datos legales"
+            type: object
+            fields:
+              - { name: nif, label: NIF/CIF, type: string, options: { maxlength: 20 } }
+              - { name: email, label: "Email de contacto", type: string, pattern: { regex: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$", message: "Debe ser un email válido" } }
+              - { name: registro, label: "Datos del Registro Mercantil", type: text, options: { maxlength: 300 } }
+          # Técnicos u obtenidos solos de Booksy/Google: ocultos (se conservan al guardar).
+          - name: horario
+            type: object
+            hidden: true
+            list: true
+            fields:
+              - { name: dias, type: string }
+              - { name: abre, type: string }
+              - { name: cierra, type: string }
+              - { name: cerrado, type: boolean }
+          - name: valoracion
+            type: object
+            hidden: true
+            fields:
+              - { name: media, type: number }
+              - { name: total, type: number }
+              - { name: fecha, type: date }
+          - name: google
+            type: object
+            hidden: true
+            fields:
+              - { name: placeId, type: string }
+              - { name: lat, type: number }
+              - { name: lng, type: number }

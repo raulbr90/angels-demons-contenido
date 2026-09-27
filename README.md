@@ -8,7 +8,7 @@ Se editan desde el panel (Pages CMS); no hace falta tocar este repositorio a man
   (jpg, jpeg, png, webp). Cualquier otro archivo se ignora.
 - Todo pasa por los tests y la auditoría de la web antes de publicarse: un dato mal escrito
   no rompe la web, simplemente no se publica y sigue la versión anterior.
-- Cada hora se comprueba si hay cambios y, si los hay, se publican.
+- Cada 20 minutos (de día) se comprueba si hay cambios y, si los hay, se publican.
 
 **Es un repositorio público**: todo lo que hay aquí ya es visible en la web. Antes de subir
 una foto hecha con el móvil, conviene que no lleve la ubicación (desactivar la ubicación de la

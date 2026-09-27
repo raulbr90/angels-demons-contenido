@@ -1,5 +1,24 @@
-[
-  { "texto": "las chicas suuuuper amables y muy profesionales un 10", "autora": "Ángeles", "profesional": "Lizy", "servicio": "Retirada semipermanente pies + cortar uñas", "fecha": "2026-09-22" },
-  { "texto": "Todo genial, como siempre!!", "autora": "Sandra", "profesional": "Dhessire", "servicio": "Manicura semipermanente + base rubber", "fecha": "2026-09-25" },
-  { "texto": "Coraima es encantadora! y hace milagros con las uñas", "autora": "Cristina", "profesional": "Coraima", "servicio": "Manicura semipermanente + retirada" }
-]
+{
+  "resenas": [
+    {
+      "texto": "las chicas suuuuper amables y muy profesionales un 10",
+      "autora": "Ángeles",
+      "profesional": "Lizy",
+      "servicio": "Retirada semipermanente pies + cortar uñas",
+      "fecha": "2026-09-22"
+    },
+    {
+      "texto": "Todo genial, como siempre!!",
+      "autora": "Sandra",
+      "profesional": "Dhessire",
+      "servicio": "Manicura semipermanente + base rubber",
+      "fecha": "2026-09-25"
+    },
+    {
+      "texto": "Coraima es encantadora! y hace milagros con las uñas",
+      "autora": "Cristina",
+      "profesional": "Coraima",
+      "servicio": "Manicura semipermanente + retirada"
+    }
+  ]
+}

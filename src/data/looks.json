@@ -1,8 +1,46 @@
-[
-  { "titulo": "Flores y hojas", "tecnica": "Nail art", "lado": "angel", "foto": "src/assets/fotos/IMG_6798.jpg", "alt": "Nude con flores blancas y hojas negras" },
-  { "titulo": "Estrellas y cebra", "tecnica": "Nail art", "lado": "demon", "foto": "src/assets/fotos/IMG_9388.jpg", "alt": "Estrellas negras y french de cebra" },
-  { "titulo": "Amarillo y estrellas", "tecnica": "Nail art", "lado": "angel", "foto": "src/assets/fotos/IMG_9268.jpg", "alt": "Amarillo pastel con estrellas doradas" },
-  { "titulo": "Animal difuminado", "tecnica": "Aerógrafo", "lado": "demon", "foto": "src/assets/fotos/IMG_8388.jpg", "alt": "Estampado animal difuminado en negro" },
-  { "titulo": "Rosa cromado", "tecnica": "Cromado", "lado": "angel", "foto": "src/assets/fotos/IMG_8372.jpg", "alt": "Stiletto rosa cromado" },
-  { "titulo": "French negra", "tecnica": "French", "lado": "demon", "foto": "src/assets/fotos/IMG_3880.jpg", "alt": "French negra con dibujo cruzado" }
-]
+{
+  "looks": [
+    {
+      "titulo": "Flores y hojas",
+      "tecnica": "Nail art",
+      "lado": "angel",
+      "foto": "src/assets/fotos/IMG_6798.jpg",
+      "alt": "Nude con flores blancas y hojas negras"
+    },
+    {
+      "titulo": "Estrellas y cebra",
+      "tecnica": "Nail art",
+      "lado": "demon",
+      "foto": "src/assets/fotos/IMG_9388.jpg",
+      "alt": "Estrellas negras y french de cebra"
+    },
+    {
+      "titulo": "Amarillo y estrellas",
+      "tecnica": "Nail art",
+      "lado": "angel",
+      "foto": "src/assets/fotos/IMG_9268.jpg",
+      "alt": "Amarillo pastel con estrellas doradas"
+    },
+    {
+      "titulo": "Animal difuminado",
+      "tecnica": "Aerógrafo",
+      "lado": "demon",
+      "foto": "src/assets/fotos/IMG_8388.jpg",
+      "alt": "Estampado animal difuminado en negro"
+    },
+    {
+      "titulo": "Rosa cromado",
+      "tecnica": "Cromado",
+      "lado": "angel",
+      "foto": "src/assets/fotos/IMG_8372.jpg",
+      "alt": "Stiletto rosa cromado"
+    },
+    {
+      "titulo": "French negra",
+      "tecnica": "French",
+      "lado": "demon",
+      "foto": "src/assets/fotos/IMG_3880.jpg",
+      "alt": "French negra con dibujo cruzado"
+    }
+  ]
+}

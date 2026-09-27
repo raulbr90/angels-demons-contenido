@@ -1,8 +1,34 @@
-[
-  { "nombre": "Belén", "permisoFoto": true, "foto": "src/assets/fotos/equipo-belen.jpg" },
-  { "nombre": "Dhessire", "permisoFoto": true, "foto": "src/assets/fotos/equipo-dhessire.jpg" },
-  { "nombre": "Mailet", "permisoFoto": true, "foto": "src/assets/fotos/equipo-mailet.jpg" },
-  { "nombre": "Rebeka", "permisoFoto": true, "foto": "src/assets/fotos/equipo-rebeka.jpg" },
-  { "nombre": "Coraima", "permisoFoto": true, "foto": "src/assets/fotos/equipo-coraima.jpg" },
-  { "nombre": "Lizy", "permisoFoto": true, "foto": "src/assets/fotos/equipo-lizy.jpg" }
-]
+{
+  "personas": [
+    {
+      "nombre": "Belén",
+      "permisoFoto": true,
+      "foto": "src/assets/fotos/equipo-belen.jpg"
+    },
+    {
+      "nombre": "Dhessire",
+      "permisoFoto": true,
+      "foto": "src/assets/fotos/equipo-dhessire.jpg"
+    },
+    {
+      "nombre": "Mailet",
+      "permisoFoto": true,
+      "foto": "src/assets/fotos/equipo-mailet.jpg"
+    },
+    {
+      "nombre": "Rebeka",
+      "permisoFoto": true,
+      "foto": "src/assets/fotos/equipo-rebeka.jpg"
+    },
+    {
+      "nombre": "Coraima",
+      "permisoFoto": true,
+      "foto": "src/assets/fotos/equipo-coraima.jpg"
+    },
+    {
+      "nombre": "Lizy",
+      "permisoFoto": true,
+      "foto": "src/assets/fotos/equipo-lizy.jpg"
+    }
+  ]
+}

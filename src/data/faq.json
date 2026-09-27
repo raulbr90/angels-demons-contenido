@@ -1,14 +1,16 @@
-[
-  {
-    "pregunta": "¿Puedo elegir con quién me hago las uñas?",
-    "respuesta": "Sí. Al reservar en Booksy eliges a Belén, Dhessire, Mailet, Rebeka, Coraima o Lizy, o la primera que esté libre."
-  },
-  {
-    "pregunta": "¿Cómo cambio o cancelo mi cita?",
-    "respuesta": "Desde la app o el email de confirmación de Booksy. Si no puedes venir, avísanos cuanto antes."
-  },
-  {
-    "pregunta": "¿Me recordáis la cita?",
-    "respuesta": "Booksy te envía la confirmación de la cita y, según los avisos que tengas activados en la app o en tu email, un recordatorio antes de la cita."
-  }
-]
+{
+  "preguntas": [
+    {
+      "pregunta": "¿Puedo elegir con quién me hago las uñas?",
+      "respuesta": "Sí. Al reservar en Booksy eliges a Belén, Dhessire, Mailet, Rebeka, Coraima o Lizy, o la primera que esté libre."
+    },
+    {
+      "pregunta": "¿Cómo cambio o cancelo mi cita?",
+      "respuesta": "Desde la app o el email de confirmación de Booksy. Si no puedes venir, avísanos cuanto antes."
+    },
+    {
+      "pregunta": "¿Me recordáis la cita?",
+      "respuesta": "Booksy te envía la confirmación de la cita y, según los avisos que tengas activados en la app o en tu email, un recordatorio antes de la cita."
+    }
+  ]
+}
