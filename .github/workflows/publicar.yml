@@ -1,0 +1,49 @@
+# Publica la web en cuanto se guarda un cambio en el panel (Pages CMS hace un
+# commit aquí). Sin esto, la web solo se entera por la comprobación periódica
+# del repositorio de la web, y el programador de GitHub la retrasa horas o se
+# la salta (medido el 27/09/2026).
+#
+# Necesita el secreto WEB_DEPLOY_TOKEN: un token «fine-grained» de GitHub con
+# acceso SOLO al repositorio raulbr90/angels-demons-web y el permiso
+# «Actions: Read and write». Sin él, este workflow no hace nada (solo avisa).
+# Solo se ejecuta en «push» a main (nunca en pull requests de terceros, que no
+# reciben secretos) y no descarga ni ejecuta nada de este repositorio.
+name: Publicar la web
+
+on:
+  push:
+    branches: [main]
+    paths: ['src/data/**', 'src/assets/fotos/**']
+
+permissions: {}
+
+concurrency:
+  group: publicar
+  cancel-in-progress: true
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions: {}
+    steps:
+      - name: Lanzar la publicación de la web
+        env:
+          TOKEN: ${{ secrets.WEB_DEPLOY_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${TOKEN}" ]; then
+            echo "::warning::Falta el secreto WEB_DEPLOY_TOKEN: la web se publicará con la comprobación periódica."
+            exit 0
+          fi
+          codigo=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 -X POST \
+            -H "Authorization: Bearer ${TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "Content-Type: application/json" \
+            -d '{"ref":"main"}' \
+            https://api.github.com/repos/raulbr90/angels-demons-web/actions/workflows/deploy.yml/dispatches)
+          if [ "${codigo}" != 204 ]; then
+            echo "::error::GitHub respondió ${codigo} al lanzar la publicación: ¿el token WEB_DEPLOY_TOKEN ha caducado o no tiene el permiso Actions?"
+            exit 1
+          fi
+          echo "Publicación de la web lanzada."
